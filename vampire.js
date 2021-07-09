@@ -41,18 +41,57 @@ class Vampire {
   /** Tree traversal methods **/
 
   // Returns the vampire object with that name, or null if no vampire exists with that name
-  vampireWithName(name) {
+  vampireWithName(vampName) {
+    
+    // Base Case
+    if(this.name === vampName) {
+      return this;
+    } 
+    
+    // Recursive Case - Mentor Help - Justin Chan
+    let output = null;
+
+    for (let i = 0; i < this.offspring.length && output === null ; i++) {
+      output = this.offspring[i].vampireWithName(vampName);
+    } 
+    
+    return output;
     
   }
 
   // Returns the total number of vampires that exist
+  // Similar to durian example
   get totalDescendents() {
+    let totalVampires = 0; // 1
+
+    // Adds descendants for 'this' vampire
+    totalVampires += this.offspring.length;
     
+    // Adds descendants to all offspring and also counts them in totalVampires
+    for (const offspring of this.offspring) { 
+      totalVampires += offspring.totalDescendents; 
+    }
+
+    return totalVampires;
   }
 
   // Returns an array of all the vampires that were converted after 1980
+  // Similar to durian example
   get allMillennialVampires() {
     
+    let millenials = []; // 1
+
+    if (this.yearConverted > 1980) {
+      millenials.push(this); // 2
+    }
+
+    for (const offspring of this.offspring) {
+      const millenialOffspring = offspring.allMillennialVampires; // 3
+      millenials = millenials.concat(millenialOffspring);
+    }
+
+    return millenials;
+
   }
 
   /** Stretch **/
@@ -67,6 +106,7 @@ class Vampire {
     let originalVampire = this;
     let thisParentsName = [];
     let thisParents = [];
+
     let comparisonVampire = vampire;
     let vampireParentsName = [];
     let vampireParents = [];
@@ -113,4 +153,3 @@ class Vampire {
 }
 
 module.exports = Vampire;
-

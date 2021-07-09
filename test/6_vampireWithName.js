@@ -27,10 +27,15 @@ describe("Vampire", function() {
 
     context("when searching with a name that exists in the tree", () => {
       it("should return the vampire with that name", () => {
+        // console.log(`Test 1`);
         expect(rootVampire.vampireWithName(rootVampire.name).name).to.equal(rootVampire.name);
+        // console.log(`Test 2`);
         expect(rootVampire.vampireWithName(offspring1.name).name).to.equal(offspring1.name);
+        // console.log(`Test 3`);
         expect(rootVampire.vampireWithName(offspring2.name).name).to.equal(offspring2.name);
+        // console.log(`Test 4`);
         expect(rootVampire.vampireWithName(offspring5.name).name).to.equal(offspring5.name);
+        // console.log(`Test 5`);
         expect(offspring3.vampireWithName(offspring5.name).name).to.equal(offspring5.name);
       });
     });
