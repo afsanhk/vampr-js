@@ -47,6 +47,51 @@ class Vampire {
   // * when comparing Ansel and Andrew, Ansel is the closest common anscestor.
   closestCommonAncestor(vampire) {
     
+    let originalVampire = this;
+    let thisParentsName = [];
+    let thisParents = [];
+    let comparisonVampire = vampire;
+    let vampireParentsName = [];
+    let vampireParents = []
+
+    // Moves up the tree and populates an array with all parents
+    while(comparisonVampire.creator) {
+      vampireParentsName.push(comparisonVampire.creator.name);
+      vampireParents.push(comparisonVampire.creator);
+      comparisonVampire = comparisonVampire.creator;
+    }
+
+    // Same as above but for this
+    while(originalVampire.creator) {
+      thisParentsName.push(originalVampire.creator.name);
+      thisParents.push(originalVampire.creator);
+      originalVampire = originalVampire.creator;
+    }
+
+    if (this === vampire) { // Same 
+      return this;
+    } else if (!this.creator) { // this is root vampire
+      return this;
+    } else if (!vampire.creator) { // Parameter vampire is root vampire
+      return vampire;
+    } else if (this.numberOfVampiresFromOriginal === 1 && vampire.numberOfVampiresFromOriginal === 1) { // Both are offspring of root vampire
+      return this.creator;
+    } else if (this === vampire.creator) { // Parameter vampire is the creator of this
+      return this;
+    } else if (vampire === this.creator) { // this is the creator of parameter vampire
+      return vampire;
+    }
+
+    // Loop through both parent arrays and return the earliest common element (i.e earliest descendant)
+    for (let i = 0; i < thisParentsName.length; i++) {
+      let thisParent = thisParentsName[i];
+      for (let j = 0; j < vampireParentsName.length; j++) {
+        let vampireParent = vampireParentsName[j];
+        if (thisParent === vampireParent) {
+          return thisParents[i];
+        } 
+      } 
+    }
   }
 }
 
