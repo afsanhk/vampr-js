@@ -35,7 +35,7 @@ class Vampire {
 
   // Returns true if this vampire is more senior than the other vampire. (Who is closer to the original vampire)
   isMoreSeniorThan(vampire) {
-    return (this.numberOfVampiresFromOriginal < vampire.numberOfVampiresFromOriginal)
+    return (this.numberOfVampiresFromOriginal < vampire.numberOfVampiresFromOriginal);
   }
 
   /** Stretch **/
@@ -52,23 +52,23 @@ class Vampire {
     let thisParents = [];
     let comparisonVampire = vampire;
     let vampireParentsName = [];
-    let vampireParents = []
+    let vampireParents = [];
 
     // Moves up the tree and populates an array with all parents
-    while(comparisonVampire.creator) {
+    while (comparisonVampire.creator) {
       vampireParentsName.push(comparisonVampire.creator.name);
       vampireParents.push(comparisonVampire.creator);
       comparisonVampire = comparisonVampire.creator;
     }
 
     // Same as above but for this
-    while(originalVampire.creator) {
+    while (originalVampire.creator) {
       thisParentsName.push(originalVampire.creator.name);
       thisParents.push(originalVampire.creator);
       originalVampire = originalVampire.creator;
     }
 
-    if (this === vampire) { // Same 
+    if (this === vampire) { // Same
       return this;
     } else if (!this.creator) { // this is root vampire
       return this;
@@ -89,8 +89,8 @@ class Vampire {
         let vampireParent = vampireParentsName[j];
         if (thisParent === vampireParent) {
           return thisParents[i];
-        } 
-      } 
+        }
+      }
     }
   }
 }

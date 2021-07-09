@@ -6,7 +6,7 @@ const Vampire = require('../vampire.js');
 describe("Vampire", function() {
 
   let rootVampire;
-  beforeEach( function() {
+  beforeEach(function() {
     rootVampire = new Vampire("root");
   });
 
@@ -36,29 +36,29 @@ describe("Vampire", function() {
     it("should be the root vampire for any vampire and the root vampire", () => {
       expect(rootVampire.closestCommonAncestor(offspring2).name).to.equal(rootVampire.name);
       expect(rootVampire.closestCommonAncestor(offspring7).name).to.equal(rootVampire.name);
-    })
+    });
 
     it("should be the root vampire for first two offspring", () => {
       expect(offspring1.closestCommonAncestor(offspring2).name).to.equal(rootVampire.name);
-    })
+    });
 
     it("should be offspring 3 for offspring 4 and 7", () => {
       expect(offspring4.closestCommonAncestor(offspring7).name).to.equal(offspring3.name);
       expect(offspring7.closestCommonAncestor(offspring4).name).to.equal(offspring3.name);
-    })
+    });
 
     it("should be that vampire if same vampire is used", () => {
       expect(offspring4.closestCommonAncestor(offspring4).name).to.equal(offspring4.name);
-    })
+    });
 
     it("should be the more senior vampire if a direct ancestor is used", () => {
       expect(offspring6.closestCommonAncestor(offspring7).name).to.equal(offspring6.name);
       expect(offspring7.closestCommonAncestor(offspring6).name).to.equal(offspring6.name);
-    })
+    });
 
     it("should be root for offspring 8 and offspring 7", () => {
       expect(offspring7.closestCommonAncestor(offspring8).name).to.equal(rootVampire.name);
       expect(offspring8.closestCommonAncestor(offspring7).name).to.equal(rootVampire.name);
-    })
+    });
   });
 });
